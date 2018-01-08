@@ -48,4 +48,9 @@ export default {
 		width: 98%;
 		background-color: #fff;
 	}
+	.display .box {
+		position: absolute;
+		border: 2px solid red;
+		background-color: rgba(0, 0, 255, 0.25);
+	}
 </style>
