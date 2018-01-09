@@ -4,19 +4,12 @@
 			<input type="file" @change="onChange">
 		</div>
 		<div class="display"></div>
-		<div class="output"></div>
 	</div>
 </template>	
 
 <script>
 
 export default {
-	data () {
-		return {
-
-		}
-	},
-
 	methods: {
 		onChange (e) {
 			let file = e.target.files[0],
@@ -36,21 +29,21 @@ export default {
 </script>
 
 <style>
-	.input {
-
-	}
-
 	.display {
 		position: relative;
 	}
 	.display img {
-		display: inline-block;
-		width: 98%;
+		display: block;
+		margin: 10px auto;
+		width: 100%;
 		background-color: #fff;
+	}
+	.display.small img {
+		width: 20%;
 	}
 	.display .box {
 		position: absolute;
 		border: 2px solid red;
-		background-color: rgba(0, 0, 255, 0.25);
+		background-color: rgba(0, 0, 255, 0.2);
 	}
 </style>

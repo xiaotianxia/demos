@@ -27,16 +27,17 @@
         line-height: 40px;
         border: 1px solid #fff;
         background-color: rgba(0, 0, 0, .3);
-        transition: all 1s ease;
-    }
-    li:hover {
-        background-color: rgba(0, 0, 0, .5);
     }
     li a {
+        transition: all 1s ease;
         display: inline-block;
         width: 100%;
         height: 100%;
         text-decoration: none;
         color: #fff;
+    }
+    li a:hover,
+    li .router-link-active {
+        background-color: rgba(0, 0, 0, .8);
     }
 </style>

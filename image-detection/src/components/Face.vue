@@ -10,7 +10,8 @@ import ImageUpload from '@/components/ImageUpload';
 export default {
 	data () {
 		return {
-			
+			image: null,
+			faces: []
 		}
 	},
 
@@ -20,38 +21,57 @@ export default {
 
 	methods: {
 		onChange (e) {
-			console.log(e.blob);
-			let image = e.image,
-				$container = $('.display'),
-				faceDetector = new FaceDetector(
-					{
-						fastMode: true, 
-						maxDetectedFaces: 20
-					}
-				);
+			this.image = e.image;
+			this.initDetector(this.image);
+		},
+
+		initDetector (image) {
+			let faceDetector = new FaceDetector(
+				{
+					fastMode: true, 
+					maxDetectedFaces: 20
+				}
+			);
 			faceDetector.detect(image)
-		      	.then(faces => {
-		        	console.log(faces);
-		        	let rate = image.offsetWidth / image.naturalWidth;
-			        for (let face of faces) {
-				        let $box = $('<div class="box"></div>');
-				        $box.css({
-							'left': rate * face.boundingBox.x,
-							'top': rate * face.boundingBox.y,
-							'width': rate * face.boundingBox.width,
-							'height': rate * face.boundingBox.height
-				        });
-				        $container.append($box);
-			        }
-			    })
-		      	.catch((e) => {
-		        	console.error("Face Detection failed, boo.", e);
-		      	});
+	      	.then(faces => {
+	      		console.log(faces);
+	      		if(!faces.length) { 
+	      			alert('No faces detected!');
+	      		} else {
+					alert(faces.length + ' faces detected!');
+		      		this.faces = faces;
+	      			this.renderBoxes(faces);
+	      		}
+		    }).catch((e) => {
+	        	console.error('fail:' + e);
+	      	});
+		},
+
+		renderBoxes (faces) {
+			let $container = $('.display');
+	        for (let face of faces) {
+				let $box = $('<div class="box"></div>'),
+					ratio = this.image.offsetWidth / this.image.naturalWidth;
+		        $box.css({
+					'left': ratio * face.boundingBox.x,
+					'top': ratio * face.boundingBox.y,
+					'width': ratio * face.boundingBox.width,
+					'height': ratio * face.boundingBox.height
+		        });
+		        $container.append($box);
+	        }
 		}
+	},
+
+	mounted () {
+		let timer = null;
+		$(window).resize(() => {
+			$('.display').find('.box').remove();
+			timer && clearTimeout(timer);
+			timer = setTimeout(() => {
+				this.renderBoxes(this.faces);
+			}, 200);
+		})
 	}
 }
 </script>
-
-<style scoped>
-	
-</style>
