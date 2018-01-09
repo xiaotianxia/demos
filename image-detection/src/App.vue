@@ -15,6 +15,12 @@ export default {
 
     components: {
         MyNav
+    },
+
+    mounted () {
+        if(!window.FaceDetector || !window.TextDetector || !window.BarcodeDetector) {
+            alert('您的浏览器不支持图像识别');
+        }
     }
 }
 </script>
