@@ -2,13 +2,13 @@
     <div class="nav">
         <ul>
             <li>
-                <router-link to="/face">face</router-link>
+                <router-link to="/face">face detection</router-link>
             </li>
             <li>
-                <router-link to="/text">text</router-link>
+                <router-link to="/text">text detection</router-link>
             </li>
             <li>
-                <router-link to="/qr">qr</router-link>
+                <router-link to="/qr">qr detection</router-link>
             </li>
         </ul>
     </div>
