@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>拍照</title>
+    <title></title>
     <style>
         * {
             margin: 0;
@@ -22,13 +22,13 @@
             border: 1px solid #000;
         }
         video,
-        button,
         .button,
         canvas {
             position: absolute;
         }
         video,
         canvas {
+            object-fit: cover;
             width: 100%;
             height: 100%;
         }
@@ -48,7 +48,7 @@
             padding: 5px 20px;
             z-index: 999;
         }
-        button.snap {
+        .button.snap {
             top: 20px;
         }
         .button.save {
@@ -63,14 +63,14 @@
     </style>
 </head>
 <body>
-    <div class="wrapper js-wrapper">
+    <div class="wrapper">
         <video autoplay playsinline></video>
-        <a class="button snap" href="javascript:;">拍照</a>
+        <a class="button snap" href="javascript:;">截图</a>
         <a class="button save hide" download="test.png">保存</a>
         <canvas></canvas>
     </div>
 <script>
-    let flag = true;
+    let flag = true,
         video = document.querySelector('video'),
         snapBtn = document.querySelector('.snap'),
         saveBtn = document.querySelector('.save'),
@@ -85,7 +85,7 @@
             saveBtn.classList.remove('hide', 'show');
             if(flag) {
                 cxt.drawImage(video, 0, 0, canvas.width, canvas.height);
-                snapBtn.innerText = '重拍';
+                snapBtn.innerText = '取消';
                 saveBtn.classList.add('show');
                 flag = false;
 
@@ -95,7 +95,7 @@
                 })
             } else {
                 cxt.clearRect(0, 0, canvas.width, canvas.height);
-                snapBtn.innerText = '拍照';
+                snapBtn.innerText = '截图';
                 saveBtn.classList.add('hide');
                 flag = true;
             }
