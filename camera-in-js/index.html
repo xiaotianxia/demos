@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>拍照</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html,
+        body {
+            font-size: 12px;
+            height: 100%;
+        }
+        .wrapper {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            margin: 0 auto;
+            border: 1px solid #000;
+        }
+        video,
+        button,
+        .button,
+        canvas {
+            position: absolute;
+        }
+        video,
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+        video {
+            z-index: 9;
+        }
+        canvas {
+            z-index: 99;
+        }
+        .button {
+            display: inline-block;
+            right: 20px;
+            border: 1px solid #000;
+            outline: none;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 20px;
+            z-index: 999;
+        }
+        button.snap {
+            top: 20px;
+        }
+        .button.save {
+            top: 50px;
+        }
+        .hide {
+            display: none;
+        }
+        .show {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper js-wrapper">
+        <video autoplay playsinline></video>
+        <a class="button snap" href="javascript:;">拍照</a>
+        <a class="button save hide" download="test.png">保存</a>
+        <canvas></canvas>
+    </div>
+<script>
+    let flag = true;
+        video = document.querySelector('video'),
+        snapBtn = document.querySelector('.snap'),
+        saveBtn = document.querySelector('.save'),
+        canvas = document.querySelector('canvas'),
+        cxt = canvas.getContext('2d');
+    navigator.mediaDevices.getUserMedia({ 
+        audio: false, 
+        video: true
+    }).then(stream => {
+        video.srcObject = stream;
+        snapBtn.onclick = () => {
+            saveBtn.classList.remove('hide', 'show');
+            if(flag) {
+                cxt.drawImage(video, 0, 0, canvas.width, canvas.height);
+                snapBtn.innerText = '重拍';
+                saveBtn.classList.add('show');
+                flag = false;
+
+                canvas.toBlob((blob) => {
+                    let url = URL.createObjectURL(blob);
+                        saveBtn.href = url;
+                })
+            } else {
+                cxt.clearRect(0, 0, canvas.width, canvas.height);
+                snapBtn.innerText = '拍照';
+                saveBtn.classList.add('hide');
+                flag = true;
+            }
+        }
+    }).catch(err => {
+        alert('error: ' + err.message);
+    });
+</script>
+</body>
+</html>
