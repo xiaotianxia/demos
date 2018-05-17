@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport"> 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet" /> 
-  	<link href="https://www.google.com/intl/en/chrome/assets/common/css/chrome.min.css" rel="stylesheet" /> 
+    <link href="./css/css.css" rel="stylesheet" /> 
+  	<link href="./css/chrome.min.css" rel="stylesheet" /> 
 <style>
 	#info {
         font-size: 20px;
@@ -82,11 +82,11 @@
 	            <p id="info_allow" style="display:none">点击上面的允许按钮，这样才能开始你的表演</p>
 	            <p id="info_denied" style="display:none">发生错误，可能你没有允许麦克风权限</p>
 	            <p id="info_blocked" style="display:none">麦克风权限受阻...</p>
-	            <p id="info_upgrade" style="display:none">你的浏览器不支持麦克风，快更新Chrome吧~</p>
+	            <p id="info_upgrade" style="display:none">你的浏览器不支持麦克风，更新浏览器试一下？~</p>
 	        </div>
 	        <div id="div_start">
 	            <button id="start_button" onclick="startButton(event)">
-	                <img alt="Start" id="start_img" src="https://www.google.com/intl/en/chrome/assets/common/images/content/mic.gif"/>
+	                <img alt="Start" id="start_img" src="./img/mic.gif"/>
 	            </button>
 	        </div>
 	        <div id="results">
@@ -142,18 +142,18 @@
 	    recognition.onstart = function() {
 	        recognizing = true;
 	        showInfo('info_speak_now');
-	        start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic-animate.gif';
+	        start_img.src = './img/mic-animate.gif';
 	    };
 
 	    recognition.onerror = function(event) {
 	        console.log(event);
 	        if (event.error == 'no-speech') {
-	            start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic.gif';
+	            start_img.src = './img/mic.gif';
 	            showInfo('info_no_speech');
 	            ignore_onend = true;
 	        }
 	        if (event.error == 'audio-capture') {
-	            start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic.gif';
+	            start_img.src = './img/mic.gif';
 	            showInfo('info_no_microphone');
 	            ignore_onend = true;
 	        }
@@ -172,7 +172,7 @@
 	        if (ignore_onend) {
 	            return;
 	        }
-	        start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic.gif';
+	        start_img.src = './img/mic.gif';
 	        if (!final_transcript) {
 	            showInfo('info_start');
 	            return;
@@ -241,7 +241,7 @@
 	    ignore_onend = false;
 	    final_span.innerHTML = '';
 	    interim_span.innerHTML = '';
-	    start_img.src = 'https://www.google.com/intl/en/chrome/assets/common/images/content/mic-slash.gif';
+	    start_img.src = './img/mic-slash.gif';
 	    showInfo('info_allow');
 	    showButtons('none');
 	    start_timestamp = event.timeStamp;
