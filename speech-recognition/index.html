@@ -75,12 +75,12 @@
 	    </div>
 	    <div class="compact marquee">
 	        <div id="info">
-	            <p id="info_start">点击麦克风，开始你的表演</p>
+	            <p id="info_start">点击麦克风图标，开始你的表演</p>
 	            <p id="info_speak_now" style="display:none">说话吧</p>
 	            <p id="info_no_speech" style="display:none">没听到声音啊，调一下你的麦克风试试？</p>
 	            <p id="info_no_microphone" style="display:none">没发现麦克风，你装麦克风了么？</p>
 	            <p id="info_allow" style="display:none">点击上面的允许按钮，这样才能开始你的表演</p>
-	            <p id="info_denied" style="display:none">你没有允许麦克风权限</p>
+	            <p id="info_denied" style="display:none">发生错误，可能你没有允许麦克风权限</p>
 	            <p id="info_blocked" style="display:none">麦克风权限受阻...</p>
 	            <p id="info_upgrade" style="display:none">你的浏览器不支持麦克风，快更新Chrome吧~</p>
 	        </div>
@@ -250,8 +250,6 @@
 	        recognizing = false;
 	        recognition.stop();
 	    }
-	    copy_button.style.display = 'none';
-	    copy_info.style.display = 'inline-block';
 	    showInfo('');
 	}
 
@@ -263,8 +261,6 @@
 	    } else {
 	        createEmail();
 	    }
-	    email_button.style.display = 'none';
-	    email_info.style.display = 'inline-block';
 	    showInfo('');
 	}
 
@@ -304,10 +300,6 @@
 	        return;
 	    }
 	    current_style = style;
-	    copy_button.style.display = style;
-	    email_button.style.display = style;
-	    copy_info.style.display = 'none';
-	    email_info.style.display = 'none';
 	}
 </script>
 </body>
