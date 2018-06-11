@@ -5,11 +5,12 @@
     <title>vibrate</title>
 </head>
 <body>
-    
+    <button class="btn">震动</button>
 </body>
 <script>
-    setInterval(() => {
-      window.navigator.vibrate([200, 100, 200]);
-    }, 1000);
+    var btn = document.querySelector('.btn');
+    btn.addEventListener('click', () => {
+        window.navigator.vibrate([200, 100, 200]);
+    });
 </script>
 </html>
